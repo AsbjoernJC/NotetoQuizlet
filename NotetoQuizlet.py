@@ -1,6 +1,3 @@
-#Virkede som det skulle d. 11-08-2020 14:35 py 3.82  deepl 1.12.2
-#Virkede som det skulle d. 11-08-2020 21:41 py 3.7 deepl 1.12.2
-#Virkede som det skulle d. 12-08-2020 11:50 py 3.7 deepl 1.12.2
 import webbrowser, pyperclip, pyautogui, time, re, requests, os, subprocess
 import tkinter as tk
 import tkinter.ttk as ttk
