@@ -13,9 +13,6 @@ class Locator:
         self.id = id    
         self.confidence = confidence      
 
-    #def description(self):  #This is an instance method. instance methods are functions that always
-        #have the parameter self, just like __init__. Unlike init the parameters aren't a necessisty
-        #to describe a dog. An instance method can only be called from an instance of that class.
     def __str__(self):
         return("Trying to locate " + self.id + " with a confidence of " + str(self.confidence))
 
