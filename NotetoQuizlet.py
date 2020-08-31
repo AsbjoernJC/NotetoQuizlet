@@ -4,6 +4,8 @@ import tkinter.ttk as ttk
 from tkinter import *
 from tkinter import filedialog, Text
 
+#All variables should be readable and make sense in english
+
 class Locator:     
 
     def __init__(self, id, confidence): 
@@ -121,9 +123,9 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
     ############Part finding the DeeplIntoButton (translate into):
     DeeplIntoButton = Locator(".img\\DeeplIntoButton.PNG", 0.3)
     DeeplIntoButton.wait_n_locate_click()
-    #Chooses the language to translate the worsd into in Deepl
+    #Chooses the language to translate the words into in Deepl
     #File format: D:\\BatFiles\\Quizletbilleder\\SprogDeepl.PNG
-    Deepltranslang = Locator(".img\\" + languageto + "Deepl.PNG", 0.4)
+    Deepltranslang = Locator(".img\\" + languageto + "Deepl.PNG", 0.6)
     Deepltranslang.wait_n_locate_click()
     time.sleep(0.6)
 
