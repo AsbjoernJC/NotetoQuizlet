@@ -19,7 +19,8 @@ class Locator:
     def __str__(self):
         return("Trying to locate " + self.id + " with a confidence of " + str(self.confidence))
 
-    ##########Hvis det her ikke virker så kopier versionen fra quizletfratekstdokument.py
+    ##########Used for continually searching for a screen element untill it has popped up on the screen.
+    #Maximizing time efficiency
     def wait_n_locate(self):     #Also an instance method. This one has two parameters
         time.sleep(0.2)
         try:
@@ -29,6 +30,8 @@ class Locator:
             time.sleep(0.1)
             self.wait_n_locate()
 
+    ##########Used for continually searching for a screen element untill it has popped up on the screen and then cliks it.
+    #Maximizing time efficiency
     def wait_n_locate_click(self):
         time.sleep(0.2)
         try:
@@ -40,8 +43,8 @@ class Locator:
             self.wait_n_locate_click()
 
 DeeplTyskTekstfeltList = []
-class DeeplLeft(Locator):
-
+class DeeplLeft(Locator):   #used specifically for the left text field in Deepl as 
+    #it opens up with black borders around the text field or with no black borders
     def try_marked_unmarked(self):
         time.sleep(0.2)
         try:        
@@ -51,11 +54,11 @@ class DeeplLeft(Locator):
                 DeeplTyskTekstfeltList.append(DeeplTyskTekstfelt)
         except TypeError:
             if DeeplTyskTekstfeltList == [] and self.id=='.img\\DeeplTyskTekstfeltKey2.PNG':
-                DeeplLeft(".img\\DeeplTyskTekstfeltKey.PNG", 0.05).try_marked_unmarked()
+                DeeplLeft(".img\\DeeplTyskTekstfeltKey.PNG", 0.05).try_marked_unmarked() #black border
             else:
-                DeeplLeft(".img\\DeeplTyskTekstfeltKey2.PNG", 0.05).try_marked_unmarked()
+                DeeplLeft(".img\\DeeplTyskTekstfeltKey2.PNG", 0.05).try_marked_unmarked() #no black border
 
-class Importer(Locator):
+class Importer(Locator):    #Used for a single element as it just wouldn't work otherwise for some reason
     def wait_n_locate_click(self):
         time.sleep(0.2)
         try:
@@ -68,45 +71,48 @@ class Importer(Locator):
 
 
 
-def wait_on_pyautogui(imagetolocate, confidence):      #Du er genial brother
+def wait_on_pyautogui(imagetolocate, confidence):      
     try:
         pyautogui.center(pyautogui.locateOnScreen(imagetolocate, confidence))
     except TypeError:
         time.sleep(0.2)
         wait_on_pyautogui(imagetolocate, confidence)
 
-def CopynPaste():           #Copy og paster
+def CopynPaste():          
     pyautogui.hotkey("ctrl", "a");
     pyautogui.hotkey("ctrl", "c")
 
 
 def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):        
 
-    
+    #txtfile is the file containing the words that will be translated
+    #txtfolder is the folder containing all the txtfiles that will be translated 
+    #languagefrom is the language the txtfile will be translated from
+    #languageto is the language the txtfile will be translated into
+
     pathTranslations = txtfolder + "\\" + txtfile + " translations.txt"
     pathFinal = txtfolder + "\\" + txtfile + " final.txt"
-    #SkrivOrdtilQuizlet = open((txtfolder), "w")
     txtfilepath = txtfolder + "\\" + txtfile + ".txt"
     
     
-    # #Del der læser filerne 
+    #Part reading the file that will be translated
     læsOrdtilQuizlet = open(txtfilepath, "r", encoding="utf-8") 
-    læsOrdtilQuizletlist = læsOrdtilQuizlet.readlines()         #Giver liste af indholdet
+    læsOrdtilQuizletlist = læsOrdtilQuizlet.readlines()         
     læsOrdtilQuizlet.close()
     
-    #Del der formaterer  
+    #Formatting
     SkrivOrdtilQuizlet = open(txtfilepath, "w", encoding="utf-8")
     læsOrdtilQuizletlistformatted = []
     for word in læsOrdtilQuizletlist:
-            læsOrdtilQuizletlistformatted.append(word.strip())  #fjerner \n fra list values og "\n" list values
+            læsOrdtilQuizletlistformatted.append(word.strip())  #removes \n from list values and "\n" list values
     for word in læsOrdtilQuizletlistformatted:
         if word == "":
-            læsOrdtilQuizletlistformatted.remove("")    #Fjerner "" list values
+            læsOrdtilQuizletlistformatted.remove("")    #removes "" list values
     læsOrdtilQuizletlistformatted = "\n".join(læsOrdtilQuizletlistformatted)
     SkrivOrdtilQuizlet.write(læsOrdtilQuizletlistformatted)
     SkrivOrdtilQuizlet.close() 
 
-    #############################Del der finder engelske oversættelser af de tyske ord
+    #############################Part working with Deepl.exe
     #Opens Deepl.exe
     subprocess.run(saveexe[0])
 
@@ -114,35 +120,39 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
     
 
     Deepl_left_side = DeeplLeft(".img\\DeeplTyskTekstfeltKey.PNG", 0.25)
-    Deepl_left_side.try_marked_unmarked()
+    Deepl_left_side.try_marked_unmarked()   #When first opening Deepl the left field of text
+    #Will either have a black border or it won't. the .try_marked_unmarked() method 
+    #switches between the two possibilities
         
-    ############Del der finder DeeplIntoButton (translate into):
+    ############Part finding the DeeplIntoButton (translate into):
     DeeplIntoButton = Locator(".img\\DeeplIntoButton.PNG", 0.3)
     DeeplIntoButton.wait_n_locate_click()
-    #Vælger sprog i deepl at translate into  #Filformat: D:\\BatFiles\\Quizletbilleder\\SprogDeepl.PNG
+    #Chooses the language to translate the worsd into in Deepl
+    #File format: D:\\BatFiles\\Quizletbilleder\\SprogDeepl.PNG
     Deepltranslang = Locator(".img\\" + languageto + "Deepl.PNG", 0.4)
     Deepltranslang.wait_n_locate_click()
     time.sleep(0.6)
 
-    pyautogui.click(DeeplTyskTekstfeltList[0])  #Trykker i tekstfeltet
+    pyautogui.click(DeeplTyskTekstfeltList[0])  #Clicks the lext field of text
     time.sleep(0.3)
-    pyautogui.hotkey("ctrl", "a")  #markere alt i tekstfeltet
-    pyautogui.hotkey("delete")      #sletter alt i tekstfeltet
+    pyautogui.hotkey("ctrl", "a")  
+    pyautogui.hotkey("delete")      #removes any words in the field of text
     time.sleep(0.4)
-    #Del der åbner fil med tyske ord
+
+    #Part opening the file that will be translated
     TyskeOrd = open(txtfilepath, "r", encoding="utf-8")        
-    pyperclip.copy(TyskeOrd.read()) #kopiere de tyske ord
-    pyautogui.hotkey("ctrl", "v")   #indsætter dem i deepl
+    pyperclip.copy(TyskeOrd.read()) #copys the words that will be translated
+    pyautogui.hotkey("ctrl", "v")   #pastes it into Deepl's left field of text
     TyskeOrd.close()
 
-    #Del der kopier de engelske ord: 
+    #Part copying the translated words: 
     time.sleep(1.2)
     pyautogui.hotkey("tab")
     time.sleep(0.4)
     pyautogui.hotkey("tab") 
     time.sleep(0.6)
-    pyautogui.hotkey("ctrl", "a")  #markere alt i tekstfeltet
-    pyautogui.hotkey("ctrl", "c")      #sletter alt i tekstfeltet
+    pyautogui.hotkey("ctrl", "a")       
+    pyautogui.hotkey("ctrl", "c")      #copys the translated words
 
     time.sleep(0.3)
     TyskeOrd = open(pathTranslations, "w", encoding="utf-8")   
@@ -150,10 +160,10 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
     TyskeOrd.close()
     
     TyskeOrd = open(pathTranslations, "r", encoding="utf-8") 
-    text = TyskeOrd.read()  #string of translations
+    text = TyskeOrd.read()  
     TyskeOrd.close()
 
-    #Formattering
+    #Formatting
     for i in range(len(text)):
         if text[-1] == "\n":
             text = text[:-1-1]
@@ -161,11 +171,12 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
         break
 
 
-    OversættelseRegex = re.compile(r"""\n(\n){2}""") #Leder efter tre newline chars i træk
+    OversættelseRegex = re.compile(r"""\n(\n){2}""") #Finding three newline characters in a row. 
+    #As this happens when Deepl doesn't come up with a translation and leaves the field empty
     OversættelseRegex.findall(text)
     FixedString = OversættelseRegex.sub("\n\n404Deepl\n", text)
 
-    #Hvis denne del ikke er der, vil TyskeOrd.write(FixedString) ikke virke?????
+ 
     TyskeOrd = open(pathTranslations, "w", encoding="utf-8")
     pyperclip.copy(FixedString)
     TyskeOrd.write(pyperclip.paste())
@@ -177,91 +188,98 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
     
     #Del der læser filerne 
     læsOrdtilQuizlet = open(pathTranslations, "r", encoding="utf-8") 
-    læsOrdtilQuizletlist = læsOrdtilQuizlet.readlines()         #Giver liste af indholdet
+    læsOrdtilQuizletlist = læsOrdtilQuizlet.readlines()        
     læsOrdtilQuizlet.close()
     ##Del der formaterer  
     SkrivOrdtilQuizlet = open(pathTranslations, "w", encoding="utf-8")
     læsOrdtilQuizletlistformatted = []
     for word in læsOrdtilQuizletlist:
-            læsOrdtilQuizletlistformatted.append(word.strip())  #fjerner \n fra list values og "\n" list values
+            læsOrdtilQuizletlistformatted.append(word.strip())  #Removes \n from list values and "\n" list values
     for word in læsOrdtilQuizletlistformatted:
         if word == "":
-            læsOrdtilQuizletlistformatted.remove("")    #Fjerner "" list values
+            læsOrdtilQuizletlistformatted.remove("")    #Removes "" list values
     læsOrdtilQuizletlistformatted = "\n".join(læsOrdtilQuizletlistformatted)
     SkrivOrdtilQuizlet.write(læsOrdtilQuizletlistformatted)
     SkrivOrdtilQuizlet.close() 
-    ####################################################################################### DEL DER MERGER 
-    #bugged i denne version  
-    Fil1 = open(txtfilepath, "r", encoding="utf-8")
-    Fil2 = open(pathTranslations, "r", encoding="utf-8")   
+
+    ####################################################################################### Part that merges the txt files 
+    Fil1 = open(txtfilepath, "r", encoding="utf-8")     #The file containing the words that were translated
+    Fil2 = open(pathTranslations, "r", encoding="utf-8")   #The file containing the translations
 
     list1 = Fil1.readlines()    #list med tyske ord
     list2 = Fil2.readlines()       #list fra FileName translations.txt
 
-    #Del der formaterer liste 1 (de tyske ord), så det udenlukkende er ordene
+    #Part formatting list 1 so it's only the words: No new line characters etc. 
     list1formatted = []
     for word in list1:
-        list1formatted.append(word.strip())  #fjerner \n fra list values og "\n" list valuesFil1.close()
+        list1formatted.append(word.strip())  #removes \n from list values and "\n" list values    Fil1.close()
 
-    #Del der formaterer liste 2, så det udenlukkende er ordene
+    #Part formatting list 2 so it's only the words no new line characters etc. 
     list2formatted = []
     for word in list2:
-        list2formatted.append(word.strip())  #fjerner \n fra list values og "\n" list valuesFil1.close()
+        list2formatted.append(word.strip())  #removes \n from list values and "\n" list values    Fil2.close()
 
-    NewList1 = []        #Alle de tyske ord med et tab character for enden
-    NewList2 = []        #Alle de danske ord med et newline character for enden
+    NewList1 = []        #Same as List1 but the words have a tab character at the end
+    NewList2 = []        #Same as List2 but the words have a newline character at the end.
 
     #Tilføjer et tab character for enden af hvert af de tyske ord
-    for word in list1formatted:     #List1 ændres så ordene har et tab character for enden
+    for word in list1formatted:     
         word = word + "\t"
+        #This is the format needed for uploading a new Quizlet set
         NewList1.append(word)
-    #Tilføjer et new line character for enden af hvert dansk ord
-    for word in list2formatted:     #List2 ændres, så ordene har et newline character for enden
+    for word in list2formatted:   
         word = word + "\n"
+        #This is the format needed for uploading a new Quizlet set   
         NewList2.append(word)
 
 
-    merged_list = []    #Laver en list of tuples fra NewList1(tyske ord med tab på enden) og Newlist2(danske ord med newline på enden)
-    Final_list = []     #laver en list med ordene inde i de tuples fra merged_list
+    merged_list = []    #Creates a list of tuples from NewList1(languagefrom words with a \t character at the end) 
+    #and NewList2(translate to words with a \n character at the end)
+    Final_list = []     #Creates a list from the words inside the tuples in merged_list 
     for i in range(len(list1)):
         try:
             TupList = (NewList1[i], NewList2[i])
             merged_list.append(TupList)
         except IndexError:
             TupList = (NewList1[i], "TransError")
+            #Deepl doesn't always return with a translation, which could lead to NewList2 having a shorter length
+            #Notifies the user that something went wrong during the translation
     
     for tuple in merged_list:
-    #    print(tuple)
         for word in tuple:
-            Final_list.append(word) #Tager ordene fra tuples der er i merged_list og laver det om til en liste
+            Final_list.append(word) 
+            #Takes the strings inside of the tuples inside of merged_list and converts it to a list
     
-    EndString = "".join(Final_list) #Laver en string ud af Final_list
+    
+    EndString = "".join(Final_list) 
     pyperclip.copy(EndString)
     TestFil = open(pathFinal, "w", encoding="utf-8")        
     TestFil.write(EndString)
     TestFil.close
     
-    #SKAL DUPPLIKERES FOR AT VIRKE ? ? ? ? ? ? ? ?   ? ? ? 
-    EndString = "".join(Final_list) #Laver en string ud af Final_list
+    #Has to be duplicated for it to work ? ? ? ? ? ? ? ?   ? ? ? Might be because fil1 and fil2 were never closed?
+    EndString = "".join(Final_list)
     pyperclip.copy(EndString)
     TestFil = open(pathFinal, "w", encoding="utf-8")        
     TestFil.write(EndString)
     TestFil.close
 
-    ################################WebbrowserdelQuizlet
+    ################################Webbrowsing part - Quizlet
     webbrowser.open("https://quizlet.com/create-set")
 
-    def wait_on_browser():      #Du er genial brother
+    def wait_on_browser():      #You're a genius. When i first stumbled upon how i could use 
+        #pyautogui.locateOnScreen without it being executed before the webbrowser was fully loaded. 
+        #whilst also continually trying to locate the screen element minimizing any delay
         try:
             Import = pyautogui.center(pyautogui.locateOnScreen(".img\\ImportQuizlet.PNG", confidence=0.4))
         except TypeError:
             time.sleep(0.1)
             wait_on_browser()
-    wait_on_browser()      #Tror den laver dobbelt
+    wait_on_browser()     
 
 
 
-    ##############Trykker på import from word, excel, google docs, etc.
+    ##############Clicks on import from word, excel, google docs, etc.
     Import = Importer(".img\\ImportQuizlet.PNG", 0.4)
     Import.wait_n_locate_click()
     pyautogui.hotkey("ctrl", "v")
@@ -281,7 +299,7 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
     time.sleep(0.2) 
     pyautogui.typewrite(txtfile)    
 
-    #####Choose language på Quizlet virker    trykker først venstre side
+    #####Choose language on Quizlet will always pick the left side first
     ChooseLanguage = Locator(".img\\ChooseLanguage.PNG", 0.4)
     ChooseLanguage.wait_n_locate_click()
     time.sleep(0.2)
@@ -290,7 +308,7 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
     pyautogui.hotkey("enter")
     time.sleep(0.5)
 
-    #####Choose language på Quizlet virker    trykker siden der er tilbage
+    #####Choose language on Quizlet will click on the last side left
     ChooseLanguage = Locator(".img\\ChooseLanguage.PNG", 0.4)
     ChooseLanguage.wait_n_locate_click()
     time.sleep(0.2)
@@ -314,17 +332,15 @@ root.iconbitmap(logo)
 
 ##################
 savedoptions = []
-savedlangoptions = []       #Skal bruges til at sætte value. index[0] vil altid være languagefrom
+savedlangoptions = []       #index[0] will always be languagefrom
 def options_look():
     if os.path.isfile(".\\Options.txt"):
         with open(".\\Options.txt", "r", encoding="utf-8") as f:
             Options = f.readlines()
             for word in Options:
                 if word[:11] in ["Translating"]:        #Translating from language: " + languagefrom[-1] + "\n" + "Translating to language:
-                    #pathregex = re.compile(r"""(: (\w)+)""", re.DOTALL)      #match =": German" fikser bare til sidst
                     pathregex = re.compile(r"""(:\s)(\w+)""", re.DOTALL)
                     mo = pathregex.search(word)
-                    #mostrip=mo.group(1).replace(": ", "")
                     mostrip=mo.group(2)
                     savedlangoptions.append(mostrip)
                 else:
@@ -333,10 +349,12 @@ def options_look():
                     mostrip = mo.group().strip()
                     savedoptions.append(mostrip)
 options_look()
-#Lader brugeren vælge en mappe
+
 FileLog = []
+
+#Lets the user choose their directory with txt files they want translated and uploaded to Quizlet
 def BrowseFolder():
-    foldername = filedialog.askdirectory()  #filedialog.askdirectory(ingen parametre)
+    foldername = filedialog.askdirectory()  
     if foldername == "":
         return
     elif foldername in FileLog:
@@ -345,7 +363,7 @@ def BrowseFolder():
         FileLog.append(foldername)
         savedir.append(foldername)
     
-    for file in FileLog: #######Visuel bug, den fjerner og tilføjer ikke hele tiden ny label
+    for file in FileLog: ##############Visual bug, it doesn't always remove and add a new label.
         if FileLog.count(foldername) == 1:
             try:
                 label4.destroy()
@@ -369,7 +387,8 @@ def BrowseDeepl():
         FileLog2.append(filename)
         saveexe.append(filename)
 
-    for file in FileLog2:       #######Visuel bug, den fjerner og tilføjer ikke hele tiden ny label
+    for file in FileLog2:       #######Visual bug, it doesn't always remove and add a new label. 
+        #Think this is because the widget children has ever changing names when creating more
         if FileLog2.count(filename) == 1:
             try:
                 label3.destroy()
@@ -396,17 +415,18 @@ canvas.pack(expand=YES, fill=BOTH)
 pic1 = PhotoImage(file=".img\\QuizletCanvasBaggrundRed2.png")
 canvas.create_image(0, 0, image=pic1, anchor=NW)
 
-#Frames til at holde radiobuttons
-frame4 = tk.Frame(canvas, height=500, width=700, bg="#263D42")    #holder translate from
+#Frames holding the radio buttons
+frame4 = tk.Frame(canvas, height=500, width=700, bg="#263D42")    #translate from
 frame4.place(y=2, x=3)
 labelf4 = ttk.Label(frame4, text="Translate from:", style='Wild.TLabel')
 labelf4.pack()
 
-frame5 = tk.Frame(canvas, height=500, width=700, bg="#263D42")    #holder translate to
+frame5 = tk.Frame(canvas, height=500, width=700, bg="#263D42")    #translate to
 frame5.place(y=2, x=86)
 labelf5 = ttk.Label(frame5, text="Translate to:", style='Wild.TLabel')
 labelf5.pack()
 
+#I just learned about nested dictionaries so I went a wee bit crazy
 d = {1: {13:"French", 14:"German", 15:"Spanish", 16:"Portuguese", 17:"Italian", 18:"Dutch", 19:"Polish", 20:"Russian", 21:"Japanese", 22:"Chinese"},
     2: {12:"English", 14:"German", 15:"Spanish", 16:"Portuguese", 17:"Italian", 18:"Dutch", 19:"Polish", 20:"Russian", 21:"Japanese", 22:"Chinese"},
     3: {13:"French", 12:"English", 15:"Spanish", 16:"Portuguese", 17:"Italian", 18:"Dutch", 19:"Polish", 20:"Russian", 21:"Japanese", 22:"Chinese"},
@@ -424,7 +444,7 @@ languagefrom, languageto = [], []
 
 def sel(var, var2):
     try:   
-        #Languagefrom og languageto bliver ved med at appende når man trykker på knapperne
+        #bug Languagefrom and languageto keeps appending when clicking the radio buttons
         langf = df[var]
         languagefrom.append(langf)        
         savedlangoptions.insert(0, langf)
@@ -512,7 +532,7 @@ R11.pack( anchor = W )
 R12 = ttk.Radiobutton(frame5, text="Chinese", style = "Wild.TRadiobutton", variable=var2, command = lambda: sel(var.get(), var2.get()), value=22)
 R12.pack( anchor = W )
 
-#Sætter sprogene til hvad de var sat til baseret på Options.txt
+#Changes the language settings based on Options.txt, which saves the usersettings, the language they are translating from and to + paths to deepl.exe and txtfiles
 def get_key(fromlangaugeval): 
 	for key, value in df.items(): 
 		if fromlangaugeval == value: 
@@ -535,18 +555,18 @@ try:
 except IndexError:
     print("No savedlangoptions")   
 
-#frame der holder knapper til at browse filer
+#frame containing the buttons for browsing files 
 frame = tk.Frame(canvas, height=100, width=700, bg="gray")
 frame.place(x=210, rely=0.7)
-#frame2 holder label der har txtfolder til onenote filer
+#frame2 contains the label with the path to the folder with .txt files
 frame2 = tk.Frame(root, height=100, width=355, bg="gray")
 frame2.pack(side=LEFT, fill=BOTH, expand=YES)
-#frame3 holder label der har txtfolder til deepl.exe
+#frame3 contains the label with the path to deepl.exe
 frame3 = tk.Frame(root, height=100, width=355, bg="gray")
 frame3.pack(side=RIGHT, fill=BOTH, expand=YES)
 
 
-#Knapper til at browse filer
+#Buttons for browsing files
 OneNote = tk.Button(frame, text="Browse for the folder with your text files inside",
  padx=20, pady=5, fg="white", bg="#263D42", command=BrowseFolder)
 OneNote.pack()
@@ -567,7 +587,7 @@ def OrdtilQuizlet2():
                     continue
                 elif txtfile[-9:] in ["final.txt"]:
                     continue
-                elif (lambda newfile: txtfile[:-4] + " final.txt")(txtfile) in files:
+                elif (lambda newfile: txtfile[:-4] + " final.txt")(txtfile) in files: #Checking if there's a file with the same name but final.txt at the end
                     continue
                 elif txtfile[-4:] in [".txt"]:       
                     txtfile = txtfile[:-4]
@@ -575,16 +595,17 @@ def OrdtilQuizlet2():
 
                 continue     
 
-#Knap til at starte Quizlet funktionen
+#The button to start the process of translating and uploading to Quizlet 
 Start = OneNote = tk.Button(frame, text="Start the translating process and upload to Quizlet",
  padx=11, pady=5, fg="white", bg="#263D42", command = OrdtilQuizlet2)
 Start.pack()
 
 
-#Labels tydeliggører paths
+#Label containing the path to the folder containing the txt file
 labelOnenote = tk.Label(frame2, text="Path to your folder:", fg="white", padx=10, pady=5, bg="gray")
 labelOnenote.pack(side=LEFT)
 
+#label containing the path to the Deepl.exe
 labelDeepl = tk.Label(frame3, text="Path to Deepl.exe:", fg="white", padx=10, pady=5, bg="gray")
 labelDeepl.pack(side=LEFT)
 
@@ -607,7 +628,8 @@ for path in savedoptions:
 
 root.mainloop()
 
-def save_options():             
+def save_options():             #Maybe use try and except to work around it displaying an error when savedoptions is empty
+    #If/else statement is probably better workaround
     with open(".\\Options.txt", "w", encoding="utf-8") as f:         
         for word in savedoptions:                    
             if word[-4:] in [".exe"]:
