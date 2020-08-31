@@ -626,7 +626,7 @@ for path in savedoptions:
 root.mainloop()
 
 def save_options():             #Maybe use try and except to work around it displaying an error when savedoptions is empty
-    #If/else statement is probably better workaround
+    #If/else statement is probably a better workaround
     with open(".\\Options.txt", "w", encoding="utf-8") as f:         
         for word in savedoptions:                    
             if word[-4:] in [".exe"]:
