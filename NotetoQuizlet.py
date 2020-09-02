@@ -38,21 +38,21 @@ class Locator:
             time.sleep(0.1)
             self.wait_n_locate_click()
 
-DeeplTyskTekstfeltList = []
+Deepl_trans_left_side = []
 class DeeplLeft(Locator):   #used specifically for the left text field in Deepl as 
-    #it opens up with black borders around the text field or with no black borders
+    #it opens up with black borders around the text field or with no black borders. Could just have named it wait_n_locate_click again.
     def try_marked_unmarked(self):
         time.sleep(0.2)
         try:        
-            if DeeplTyskTekstfeltList == []:
+            if Deepl_trans_left_side == []:
                 f = pyautogui.center(pyautogui.locateOnScreen(self.id, self.confidence, grayscale = True))
                 DeeplTyskTekstfelt = f
-                DeeplTyskTekstfeltList.append(DeeplTyskTekstfelt)
+                Deepl_trans_left_side.append(DeeplTyskTekstfelt)
         except TypeError:
-            if DeeplTyskTekstfeltList == [] and self.id=='.img\\DeeplTyskTekstfeltKey2.PNG':
-                DeeplLeft(".img\\DeeplTyskTekstfeltKey.PNG", 0.05).try_marked_unmarked() #black border
+            if Deepl_trans_left_side == [] and self.id=='.img\\DeeplTyskTekstfeltKey2.PNG':
+                DeeplLeft(".img\\DeeplTyskTekstfeltKey.PNG", 0.25).try_marked_unmarked() #black border
             else:
-                DeeplLeft(".img\\DeeplTyskTekstfeltKey2.PNG", 0.05).try_marked_unmarked() #no black border
+                DeeplLeft(".img\\DeeplTyskTekstfeltKey2.PNG", 0.25).try_marked_unmarked() #no black border
 
 class Importer(Locator):    #Used for a single element as it just wouldn't work otherwise for some reason
     def wait_n_locate_click(self):
@@ -92,21 +92,21 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
     
     
     #Part reading the file that will be translated
-    læsOrdtilQuizlet = open(txtfilepath, "r", encoding="utf-8") 
-    læsOrdtilQuizletlist = læsOrdtilQuizlet.readlines()         
-    læsOrdtilQuizlet.close()
+    read_words = open(txtfilepath, "r", encoding="utf-8") 
+    read_wordslist = read_words.readlines()         
+    read_words.close()
     
     #Formatting
-    SkrivOrdtilQuizlet = open(txtfilepath, "w", encoding="utf-8")
-    læsOrdtilQuizletlistformatted = []
-    for word in læsOrdtilQuizletlist:
-            læsOrdtilQuizletlistformatted.append(word.strip())  #removes \n from list values and "\n" list values
-    for word in læsOrdtilQuizletlistformatted:
+    format_txtdoc = open(txtfilepath, "w", encoding="utf-8")
+    read_wordslistformatted = []
+    for word in read_wordslist:
+            read_wordslistformatted.append(word.strip())  #removes \n from list values and "\n" list values
+    for word in read_wordslistformatted:
         if word == "":
-            læsOrdtilQuizletlistformatted.remove("")    #removes "" list values
-    læsOrdtilQuizletlistformatted = "\n".join(læsOrdtilQuizletlistformatted)
-    SkrivOrdtilQuizlet.write(læsOrdtilQuizletlistformatted)
-    SkrivOrdtilQuizlet.close() 
+            read_wordslistformatted.remove("")    #removes "" list values
+    read_wordslistformatted = "\n".join(read_wordslistformatted)
+    format_txtdoc.write(read_wordslistformatted)
+    format_txtdoc.close() 
 
     #############################Part working with Deepl.exe
     #Opens Deepl.exe
@@ -124,12 +124,12 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
     DeeplIntoButton = Locator(".img\\DeeplIntoButton.PNG", 0.3)
     DeeplIntoButton.wait_n_locate_click()
     #Chooses the language to translate the words into in Deepl
-    #File format: D:\\BatFiles\\Quizletbilleder\\SprogDeepl.PNG
+    #File format: D:\\BatFiles\\Quizletbilleder\\LanguageDeepl.PNG
     Deepltranslang = Locator(".img\\" + languageto + "Deepl.PNG", 0.6)
     Deepltranslang.wait_n_locate_click()
     time.sleep(0.6)
 
-    pyautogui.click(DeeplTyskTekstfeltList[0])  #Clicks the lext field of text
+    pyautogui.click(Deepl_trans_left_side[0])  #Clicks the lext field of text
     time.sleep(0.3)
     pyautogui.hotkey("ctrl", "a")  
     pyautogui.hotkey("delete")      #removes any words in the field of text
@@ -183,78 +183,78 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
     TyskeOrd.close
     
     #Del der læser filerne 
-    læsOrdtilQuizlet = open(pathTranslations, "r", encoding="utf-8") 
-    læsOrdtilQuizletlist = læsOrdtilQuizlet.readlines()        
-    læsOrdtilQuizlet.close()
+    read_words = open(pathTranslations, "r", encoding="utf-8") 
+    read_wordslist = read_words.readlines()        
+    read_words.close()
     ##Del der formaterer  
-    SkrivOrdtilQuizlet = open(pathTranslations, "w", encoding="utf-8")
-    læsOrdtilQuizletlistformatted = []
-    for word in læsOrdtilQuizletlist:
-            læsOrdtilQuizletlistformatted.append(word.strip())  #Removes \n from list values and "\n" list values
-    for word in læsOrdtilQuizletlistformatted:
+    format_txtdoc = open(pathTranslations, "w", encoding="utf-8")
+    read_wordslistformatted = []
+    for word in read_wordslist:
+            read_wordslistformatted.append(word.strip())  #Removes \n from list values and "\n" list values
+    for word in read_wordslistformatted:
         if word == "":
-            læsOrdtilQuizletlistformatted.remove("")    #Removes "" list values
-    læsOrdtilQuizletlistformatted = "\n".join(læsOrdtilQuizletlistformatted)
-    SkrivOrdtilQuizlet.write(læsOrdtilQuizletlistformatted)
-    SkrivOrdtilQuizlet.close() 
+            read_wordslistformatted.remove("")    #Removes "" list values
+    read_wordslistformatted = "\n".join(read_wordslistformatted)
+    format_txtdoc.write(read_wordslistformatted)
+    format_txtdoc.close() 
 
     ####################################################################################### Part that merges the txt files 
-    Fil1 = open(txtfilepath, "r", encoding="utf-8")     #The file containing the words that were translated
-    Fil2 = open(pathTranslations, "r", encoding="utf-8")   #The file containing the translations
+    languagefromtxt = open(txtfilepath, "r", encoding="utf-8")     #The file containing the words that were translated
+    languagetotxt = open(pathTranslations, "r", encoding="utf-8")   #The file containing the translations
 
-    list1 = Fil1.readlines()    #list med tyske ord
-    list2 = Fil2.readlines()       #list fra FileName translations.txt
+    languageto_list = languagefromtxt.readlines()    #list med tyske ord
+    languagefrom_list = languagetotxt.readlines()       #list from FileName translations.txt
 
     #Part formatting list 1 so it's only the words: No new line characters etc. 
-    list1formatted = []
-    for word in list1:
-        list1formatted.append(word.strip())  #removes \n from list values and "\n" list values    Fil1.close()
+    list_without_newline = []
+    for word in languageto_list:
+        list_without_newline.append(word.strip())  #removes \n from list values and "\n" list values    languagefromtxt.close()
 
     #Part formatting list 2 so it's only the words no new line characters etc. 
-    list2formatted = []
-    for word in list2:
-        list2formatted.append(word.strip())  #removes \n from list values and "\n" list values    Fil2.close()
+    list_words_only = []
+    for word in languagefrom_list:
+        list_words_only.append(word.strip())  #removes \n from list values and "\n" list values    languagetotxt.close()
 
-    NewList1 = []        #Same as List1 but the words have a tab character at the end
-    NewList2 = []        #Same as List2 but the words have a newline character at the end.
+    languagefrom_with_tabchar = []        #Same as List1 but the words have a tab character at the end
+    languageto_with_newlinechar = []        #Same as List2 but the words have a newline character at the end.
 
     #Tilføjer et tab character for enden af hvert af de tyske ord
-    for word in list1formatted:     
+    for word in list_without_newline:     
         word = word + "\t"
         #This is the format needed for uploading a new Quizlet set
-        NewList1.append(word)
-    for word in list2formatted:   
+        languagefrom_with_tabchar.append(word)
+    for word in list_words_only:   
         word = word + "\n"
         #This is the format needed for uploading a new Quizlet set   
-        NewList2.append(word)
+        languageto_with_newlinechar.append(word)
 
 
-    merged_list = []    #Creates a list of tuples from NewList1(languagefrom words with a \t character at the end) 
-    #and NewList2(translate to words with a \n character at the end)
-    Final_list = []     #Creates a list from the words inside the tuples in merged_list 
-    for i in range(len(list1)):
+    merged_list = []    #Creates a list of tuples from languagefrom_with_tabchar(languagefrom words with a \t character at the end) 
+    #and languageto_with_newlinechar(translate to words with a \n character at the end)
+    Quizlet_ready_list = []     #Creates a list from the words inside the tuples in merged_list 
+    for i in range(len(languageto_list)):
         try:
-            TupList = (NewList1[i], NewList2[i])
+            TupList = (languagefrom_with_tabchar[i], languageto_with_newlinechar[i])
             merged_list.append(TupList)
         except IndexError:
-            TupList = (NewList1[i], "TransError")
-            #Deepl doesn't always return with a translation, which could lead to NewList2 having a shorter length
+            TupList = (languagefrom_with_tabchar[i], "TransError")
+            #Deepl doesn't always return with a translation, which could lead to languageto_with_newlinechar having a shorter length
             #Notifies the user that something went wrong during the translation
     
     for tuple in merged_list:
         for word in tuple:
-            Final_list.append(word) 
+            Quizlet_ready_list.append(word) 
             #Takes the strings inside of the tuples inside of merged_list and converts it to a list
     
     
-    EndString = "".join(Final_list) 
+    EndString = "".join(Quizlet_ready_list) #Makes the combined list of the words and their translations into a string, so it can be pasted into Quizlet
     pyperclip.copy(EndString)
     TestFil = open(pathFinal, "w", encoding="utf-8")        
     TestFil.write(EndString)
     TestFil.close
     
     #Has to be duplicated for it to work ? ? ? ? ? ? ? ?   ? ? ? Might be because fil1 and fil2 were never closed?
-    EndString = "".join(Final_list)
+    EndString = "".join(Quizlet_ready_list)
     pyperclip.copy(EndString)
     TestFil = open(pathFinal, "w", encoding="utf-8")        
     TestFil.write(EndString)
