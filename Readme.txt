@@ -53,7 +53,7 @@ Say we have a textfile: Textfile.txt with with UTF-8 encoding - can be chosen wh
 Textfile.txt the content seen when opening the txt must be fo: 
 König			<-wrote word and pressed enter
 Apfel			<-wrote new word and pressed enter
-Wasser			<-worte new word (for the last word it does not matter if you have pressed enter)
+Wasser			<-wrote new word (for the last word it does not matter if you have pressed enter)
 
 3. P: The program opens https://quizlet.com/create-set but stops therafter
    S: This probably happened because of the browser window opening on another screen than your mainscreen. You must
