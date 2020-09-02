@@ -659,8 +659,11 @@ def save_options():             #Maybe use try and except to work around it disp
                 saveexe.append(word)
             else:
                 savedir.append(word)
-        f.write("Path to your txt files: " + savedir[0] + "\n" + "Path to your Deepl.exe: " + saveexe[0] + "\n"
+        try:
+            f.write("Path to your txt files: " + savedir[0] + "\n" + "Path to your Deepl.exe: " + saveexe[0] + "\n"
                 + "Translating from language: " + savedlangoptions[0] + "\n" + "Translating to language: " + savedlangoptions[-1] + "\n")
+        except IndexError:
+            f.write("")
 save_options()
 
 
