@@ -1,0 +1,87 @@
+2020-09-02 13:32:48,312 - CRITICAL - GUI via tkinter working correctly
+2020-09-02 13:32:48,312 - DEBUG - Trying to translate and upload Ruhm 1 in 'German' to 'English' from D:/BatFiles/Quizlettxtfiler to Quizlet
+2020-09-02 13:32:48,448 - CRITICAL - Deepl.exe was opened
+2020-09-02 13:32:49,692 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey.PNG with a confidence of 0.25. Success
+2020-09-02 13:32:50,350 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3
+2020-09-02 13:32:51,042 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3
+2020-09-02 13:32:51,720 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3
+2020-09-02 13:32:52,433 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3
+2020-09-02 13:32:53,082 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3
+2020-09-02 13:32:53,760 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3
+2020-09-02 13:32:54,394 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3
+2020-09-02 13:32:55,032 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3
+2020-09-02 13:32:55,682 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3
+2020-09-02 13:34:38,201 - CRITICAL - GUI via tkinter working correctly
+2020-09-02 13:34:38,201 - DEBUG - Trying to translate and upload Ruhm 1 in 'German' to 'English' from D:/BatFiles/Quizlettxtfiler to Quizlet
+2020-09-02 13:34:38,304 - CRITICAL - Deepl.exe was opened
+2020-09-02 13:34:39,303 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey.PNG with a confidence of 0.25. Success
+2020-09-02 13:34:39,755 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3. Success
+2020-09-02 13:34:40,648 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6
+2020-09-02 13:34:41,566 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6
+2020-09-02 13:34:42,562 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6
+2020-09-02 13:34:43,512 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6
+2020-09-02 13:34:44,447 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6
+2020-09-02 13:34:45,367 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6
+2020-09-02 13:34:46,289 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6
+2020-09-02 13:34:47,220 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6
+2020-09-02 13:34:48,150 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6
+2020-09-02 13:37:53,462 - CRITICAL - GUI via tkinter working correctly
+2020-09-02 13:37:53,463 - DEBUG - Trying to translate and upload Ruhm 1 in 'German' to 'English' from D:/BatFiles/Quizlettxtfiler to Quizlet
+2020-09-02 13:37:53,580 - CRITICAL - Deepl.exe was opened
+2020-09-02 13:37:54,742 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey.PNG with a confidence of 0.25. Success
+2020-09-02 13:37:55,193 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3. Success
+2020-09-02 13:37:55,616 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6. Success
+2020-09-02 13:37:59,902 - CRITICAL - https://quizlet.com/create-set was successfully opened
+2020-09-02 13:38:01,027 - CRITICAL - Trying to locate .img\ImportQuizlet.PNG with a confidence of 0.4
+2020-09-02 13:38:02,177 - CRITICAL - Trying to locate .img\ImportQuizlet.PNG with a confidence of 0.4. Success
+2020-09-02 13:38:03,460 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:04,236 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:05,023 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:05,779 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:06,596 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:07,406 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:08,200 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:08,909 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:09,725 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:10,495 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:11,281 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:12,085 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:12,889 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:13,649 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:14,450 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:15,226 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:16,047 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:16,842 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:17,657 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:18,583 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:19,364 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:20,091 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:20,916 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:38:21,731 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4
+2020-09-02 13:40:57,779 - CRITICAL - GUI via tkinter working correctly
+2020-09-02 13:40:57,779 - DEBUG - Trying to translate and upload Ruhm 1 in 'German' to 'English' from D:/BatFiles/Quizlettxtfiler to Quizlet
+2020-09-02 13:40:57,872 - CRITICAL - Deepl.exe was opened
+2020-09-02 13:40:59,012 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey.PNG with a confidence of 0.25. Success
+2020-09-02 13:40:59,474 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3. Success
+2020-09-02 13:40:59,896 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6. Success
+2020-09-02 13:41:04,139 - CRITICAL - https://quizlet.com/create-set was successfully opened
+2020-09-02 13:41:05,115 - CRITICAL - Trying to locate .img\ImportQuizlet.PNG with a confidence of 0.4
+2020-09-02 13:41:05,928 - CRITICAL - Trying to locate .img\ImportQuizlet.PNG with a confidence of 0.4
+2020-09-02 13:41:07,067 - CRITICAL - Trying to locate .img\ImportQuizlet.PNG with a confidence of 0.4
+2020-09-02 13:41:07,743 - CRITICAL - Trying to locate .img\ImportQuizlet.PNG with a confidence of 0.4. Success
+2020-09-02 13:41:08,790 - CRITICAL - Trying to locate .img\ImportImport.PNG with a confidence of 0.4. Success
+2020-09-02 13:41:09,659 - CRITICAL - Couldn't locate CreateButton
+2020-09-02 13:41:09,892 - CRITICAL - CreateButton was located
+2020-09-02 13:41:10,943 - CRITICAL - Trying to locate .img\TitleQuizlet.PNG with a confidence of 0.4
+2020-09-02 13:41:11,480 - CRITICAL - Trying to locate .img\TitleQuizlet.PNG with a confidence of 0.4. Success
+2020-09-02 13:41:12,261 - CRITICAL - Trying to locate .img\ChooseLanguage.PNG with a confidence of 0.4. Success
+2020-09-02 13:41:13,989 - CRITICAL - Trying to locate .img\ChooseLanguage.PNG with a confidence of 0.4. Success
+2020-09-02 13:41:14,744 - CRITICAL - CreateButton was located
+2020-09-02 13:41:15,090 - DEBUG - Finished translating and uploading Ruhm 1 to Quizlet 
+
+
+2020-09-02 13:41:15,090 - CRITICAL - GUI via tkinter working correctly
+2020-09-02 13:41:15,090 - DEBUG - Trying to translate and upload Tschick 4 in 'German' to 'English' from D:/BatFiles/Quizlettxtfiler to Quizlet
+2020-09-02 13:41:15,192 - CRITICAL - Deepl.exe was opened
+2020-09-02 13:41:16,445 - CRITICAL - Trying to locate .img\DeeplIntoButton.PNG with a confidence of 0.3. Success
+2020-09-02 13:41:16,895 - CRITICAL - Trying to locate .img\EnglishDeepl.PNG with a confidence of 0.6. Success
