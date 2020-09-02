@@ -370,7 +370,7 @@ def BrowseFolder():
                     label = tk.Label(frame2, pady=5, text=file, fg="white", bg="gray")
                     label.pack(side=LEFT)
 
-#Lader brugeren vælge Deepl.exe
+#Lets the user find Deepl.exe
 FileLog2 = []
 def BrowseDeepl():
     filename = filedialog.askopenfilename(initialdir="/", title="Select File",
