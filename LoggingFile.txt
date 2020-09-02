@@ -1,0 +1,16 @@
+2020-09-02 12:01:25,198 - CRITICAL - 
+ GUI via tkinter working correctly
+2020-09-02 12:01:25,198 - DEBUG - Trying to translate and upload Ruhm 1 in 'German' to 'English' from D:/BatFiles/Quizlettxtfiler to Quizlet
+2020-09-02 12:01:25,294 - CRITICAL - Deepl.exe was opened
+2020-09-02 12:01:26,421 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey.PNG with a confidence of 0.25
+2020-09-02 12:01:26,990 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey2.PNG with a confidence of 0.25
+2020-09-02 12:01:27,479 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey.PNG with a confidence of 0.25
+2020-09-02 12:01:27,984 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey2.PNG with a confidence of 0.25
+2020-09-02 12:01:28,527 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey.PNG with a confidence of 0.25
+2020-09-02 12:01:29,027 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey2.PNG with a confidence of 0.25
+2020-09-02 12:01:29,480 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey.PNG with a confidence of 0.25
+2020-09-02 12:01:29,987 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey2.PNG with a confidence of 0.25
+2020-09-02 12:01:30,508 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey.PNG with a confidence of 0.25
+2020-09-02 12:01:31,024 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey2.PNG with a confidence of 0.25
+2020-09-02 12:01:31,545 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey.PNG with a confidence of 0.25
+2020-09-02 12:01:32,077 - CRITICAL - Trying to locate .img\DeeplTyskTekstfeltKey2.PNG with a confidence of 0.25

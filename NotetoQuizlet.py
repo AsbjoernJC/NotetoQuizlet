@@ -1,10 +1,17 @@
-import webbrowser, pyperclip, pyautogui, time, re, requests, os, subprocess
+import webbrowser, pyperclip, pyautogui, time, re, requests, os, subprocess, logging
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import *
 from tkinter import filedialog, Text
 
 #All variables should be readable and make sense in english
+
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
+error_file = dname + "\ErrorLog.txt"
+logging.basicConfig(filename=error_file, level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
 
 class Locator:     
 
@@ -21,9 +28,11 @@ class Locator:
         time.sleep(0.2)
         try:
             position = pyautogui.center(pyautogui.locateOnScreen(self.id, self.confidence, grayscale = True))
+            logging.critical("%s. Success" %(self))
             return position
         except TypeError:
             time.sleep(0.1)
+            logging.critical("%s" %(self))
             self.wait_n_locate()
 
     ##########Used for continually searching for a screen element untill it has popped up on the screen and then cliks it.
@@ -33,8 +42,10 @@ class Locator:
         try:
             x = pyautogui.center(pyautogui.locateOnScreen(self.id, self.confidence, grayscale = True))  
             pyautogui.click(x)
+            logging.critical("%s. Success" %(self))
             return("202")
         except TypeError:
+            logging.critical("%s" %(self))
             time.sleep(0.1)
             self.wait_n_locate_click()
 
@@ -48,10 +59,13 @@ class DeeplLeft(Locator):   #used specifically for the left text field in Deepl 
                 f = pyautogui.center(pyautogui.locateOnScreen(self.id, self.confidence, grayscale = True))
                 DeeplTyskTekstfelt = f
                 Deepl_trans_left_side.append(DeeplTyskTekstfelt)
+                logging.critical("%s. Success" %(self))
         except TypeError:
             if Deepl_trans_left_side == [] and self.id=='.img\\DeeplTyskTekstfeltKey2.PNG':
+                logging.critical("%s" %(self))
                 DeeplLeft(".img\\DeeplTyskTekstfeltKey.PNG", 0.25).try_marked_unmarked() #black border
             else:
+                logging.critical("%s" %(self))
                 DeeplLeft(".img\\DeeplTyskTekstfeltKey2.PNG", 0.25).try_marked_unmarked() #no black border
 
 class Importer(Locator):    #Used for a single element as it just wouldn't work otherwise for some reason
@@ -60,9 +74,11 @@ class Importer(Locator):    #Used for a single element as it just wouldn't work 
         try:
             x = pyautogui.center(pyautogui.locateOnScreen(self.id, self.confidence))  
             pyautogui.click(x)
+            logging.critical("%s. Success" %(self))
             return("202")
         except TypeError:
             time.sleep(0.1)
+            logging.critical("%s" %(self))
             self.wait_n_locate_click()    
 
 
@@ -70,8 +86,10 @@ class Importer(Locator):    #Used for a single element as it just wouldn't work 
 def wait_on_pyautogui(imagetolocate, confidence):      
     try:
         pyautogui.center(pyautogui.locateOnScreen(imagetolocate, confidence))
+        logging.critical("CreateButton was located")
     except TypeError:
         time.sleep(0.2)
+        logging.critical("Couldn't locate CreateButton")
         wait_on_pyautogui(imagetolocate, confidence)
 
 def CopynPaste():          
@@ -80,17 +98,20 @@ def CopynPaste():
 
 
 def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):        
-
+    logging.critical("GUI via tkinter working correctly")
     #txtfile is the file containing the words that will be translated
     #txtfolder is the folder containing all the txtfiles that will be translated 
     #languagefrom is the language the txtfile will be translated from
     #languageto is the language the txtfile will be translated into
 
+
+
     pathTranslations = txtfolder + "\\" + txtfile + " translations.txt"
     pathFinal = txtfolder + "\\" + txtfile + " final.txt"
     txtfilepath = txtfolder + "\\" + txtfile + ".txt"
     
-    
+    logging.debug("Trying to translate and upload %s in '%s' to '%s' from %s to Quizlet" % (txtfile, languagefrom, languageto, txtfolder))
+
     #Part reading the file that will be translated
     read_words = open(txtfilepath, "r", encoding="utf-8") 
     read_wordslist = read_words.readlines()         
@@ -111,6 +132,7 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
     #############################Part working with Deepl.exe
     #Opens Deepl.exe
     subprocess.run(saveexe[0])
+    logging.critical("Deepl.exe was opened")
 
     time.sleep(0.6)
     
@@ -262,7 +284,7 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
 
     ################################Webbrowsing part - Quizlet
     webbrowser.open("https://quizlet.com/create-set")
-
+    logging.critical("https://quizlet.com/create-set was successfully opened")
     def wait_on_browser():      #You're a genius. When i first stumbled upon how i could use 
         #pyautogui.locateOnScreen without it being executed before the webbrowser was fully loaded. 
         #whilst also continually trying to locate the screen element minimizing any delay
@@ -317,6 +339,8 @@ def OrdtilQuizlet(txtfile, txtfolder, languagefrom, languageto):
     wait_on_pyautogui(CreateButton, confidence)
     pyautogui.click(CreateButton) 
 
+    logging.debug("Finished translating and uploading %s to Quizlet \n\n" % (txtfile))
+
 
 root = tk.Tk()
 saveexe = []
@@ -342,8 +366,11 @@ def options_look():
                 else:
                     pathregex = re.compile(r""" (\w\:(.)+)""", re.DOTALL)       #finds D:/ followed by anything
                     mo = pathregex.search(word)
-                    mostrip = mo.group().strip()
-                    savedoptions.append(mostrip)
+                    try: 
+                        mostrip = mo.group().strip()
+                        savedoptions.append(mostrip)
+                    except AttributeError:
+                        break
 options_look()
 
 FileLog = []

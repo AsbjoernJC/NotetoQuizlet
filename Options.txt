@@ -1,1 +1,4 @@
-
+Path to your txt files: D:/BatFiles/Quizlettxtfiler
+Path to your Deepl.exe: C:/Users/Asser/AppData/Local/DeepL/DeepL.exe
+Translating from language: German
+Translating to language: English
